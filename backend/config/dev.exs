@@ -52,7 +52,7 @@ config :phoenix, :stacktrace_depth, 20
 config :backend, Backend.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "gonaku996",
   database: "backend_dev",
   hostname: "localhost",
   pool_size: 10
