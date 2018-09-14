@@ -1,7 +1,10 @@
 {
   "name": "teaching-site-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "repository": "https://github.com/candrade86/teaching-site-backend.git",
   "author": "Carlos Andrade <carlos.andrade86@outlook.com>",
   "license": "MIT",
@@ -12,9 +15,11 @@
     "jwt-simple": "^0.5.1",
     "mongoose": "^5.2.14",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.4",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }
