@@ -37,7 +37,7 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/signin', (req, res) => {
-    res.send({ token: tokenForUser(req.user) });
+    res.send({ token: tokenForUser(req.body) });
 })
 
 module.exports = router;
