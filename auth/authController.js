@@ -9,23 +9,28 @@ function tokenForUser(user) {
 }
 
 router.post('/signup', (req, res) => {
+    const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
+    
   
-    if (!email || !password) {
-      return res.status(422).send({ error: 'You must provide email and password'});
+    if (!username || !email || !password) {
+      return res.status(422).send({ error: 'You must provide username, email and password'});
     }
   
     User.findOne({ email: email }, function(err, existingUser) {
+      console.log(existingUser);
+      
       if (err) { return next(err); }
-  
+      
       if (existingUser) {
         return res.status(422).send({ error: 'Email is in use' });
-      }
+      }  
   
       const user = new User({
-        email: email,
-        password: password
+        username,
+        email,
+        password
       });
   
       user.save(function(err) {
