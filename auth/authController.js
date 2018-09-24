@@ -5,7 +5,7 @@ const config = require('../config');
 
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
-  return jwt.encode({ sub: user.id, iat: timestamp, username: username }, config.secret);
+  return jwt.encode({ sub: user.id, iat: timestamp, username: user.username }, config.secret);
 }
 
 router.post('/signup', (req, res) => {
