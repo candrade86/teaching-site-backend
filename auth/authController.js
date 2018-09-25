@@ -1,4 +1,5 @@
 const jwt = require('jwt-simple');
+const bcrypt = require("bcrypt");
 const router = require('express').Router();
 const User = require('../users/userModel');
 const config = require('../config');
@@ -42,7 +43,28 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/signin', (req, res) => {
-    res.send({ token: tokenForUser(req.body) });
-})
+  const email = req.body.email;
+  const password = req.body.password;
+  let matched;
+
+  if (!email || !password) {
+    console.log('email or password are missing')
+    return res.status(422).send({ error: 'You must provide an email and password'});
+  }
+  User.findOne({ email: email }, function(err, existingUser) {
+    
+  
+    if (err) { res.json(err); }
+    
+    if (existingUser) {
+      matched = bcrypt.compareSync(password, existingUser.password);
+
+      if (matched) {
+        res.json({ token: tokenForUser(existingUser) });
+      }
+    }
+  });
+
+});
 
 module.exports = router;
