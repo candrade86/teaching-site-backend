@@ -12,6 +12,7 @@ mongoose
   .catch(err => console.log('Failed to connect to mongoDB'))
 
 const authController = require('./auth/authController');
+const eventController = require('./events/eventController');
 
 const server = express();
 
@@ -25,6 +26,7 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/authentication', authController)
+server.use('/api/event', eventController)
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
