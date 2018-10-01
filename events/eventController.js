@@ -12,7 +12,14 @@ router.get('/', (req, res) => {
 });
 
 router.post("/create-event", (req, res) => {
+    const { title, start, end } = req.body;
+    const events = new Events ({ title, start, end });
 
+    events.save()
+        .then(e => {
+            res.status(201).json(e);
+        })
+        .catch(err => res.status(500).json(err));
 });
 
 module.exports = router;
