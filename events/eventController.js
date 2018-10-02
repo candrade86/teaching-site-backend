@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.post("/create-event", (req, res) => {
-    const { title, start, end } = req.body;
+    let { title, start, end } = req.body;
     const events = new Events ({ title, start, end });
 
     events.save()
@@ -21,5 +21,18 @@ router.post("/create-event", (req, res) => {
         })
         .catch(err => res.status(500).json(err));
 });
+
+router.delete('/delete-event/:id', (req, res) => {
+    const { id } = req.params;
+    
+    Events.findByIdAndRemove(id)
+      .then(removed => {
+        res.status(200).json(removed);
+      })
+      .catch(err => {
+        res.status(500).json(console.error("Error deleting event", err));
+      });
+  });
+
 
 module.exports = router;
