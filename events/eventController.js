@@ -22,6 +22,19 @@ router.post("/create-event", (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
+router.put("/update-event", (req, res) => {
+    const { id } = req.body;
+    let update = req.body.update;
+  
+    Events.findByIdAndUpdate(id, update)
+      .then(updated => {
+        res.status(200).json(updated);
+      })
+      .catch(err => {
+        res.status(500).json("Error updating the event", err);
+      });
+  });
+
 router.delete('/delete-event/:id', (req, res) => {
     const { id } = req.params;
     
