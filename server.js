@@ -13,6 +13,7 @@ mongoose
 
 const authController = require('./auth/authController');
 const eventController = require('./events/eventController');
+const paypalController = require('./paypal/paypalController');
 
 const server = express();
 
@@ -25,8 +26,9 @@ server.get('/', (req, res) => {
   res.status(200).json({ api: 'running' });
 });
 
-server.use('/api/authentication', authController)
-server.use('/api/event', eventController)
+server.use('/api/authentication', authController);
+server.use('/api/event', eventController);
+server.use('/api/paypal', paypalController);
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
