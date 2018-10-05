@@ -1,5 +1,7 @@
 const router = require('express').Router();
-require('./config');
+const paypal = require('paypal-rest-sdk');
+
+
 
 router
   .post('/pay', (req, res) => {
@@ -14,7 +16,6 @@ router
       },
       transactions:[{
         amount:{
-          name: 'conversational english',
           total:'90.00',
           currency:'USD'
         },
@@ -48,23 +49,22 @@ router
       }
     });
 
-
+    var paymentId = req.query.paymentId;
+    var payerId = { payer_id: req.query.PayerID };
+    
+    paypal.payment.execute(paymentId, payerId, function(error, payment){
+      if(error){
+        console.error(JSON.stringify(error));
+      } else {
+        if (payment.state == 'approved'){
+          console.log('payment completed successfully');
+        } else {
+          console.log('payment not successful');
+        }
+      }
+    });
 
   })
-  
+
 module.exports = router;
 
-// var paymentId = req.query.paymentId;
-// var payerId = { payer_id: req.query.PayerID };
-
-// paypal.payment.execute(paymentId, payerId, function(error, payment){
-//   if(error){
-//     console.error(JSON.stringify(error));
-//   } else {
-//     if (payment.state == 'approved'){
-//       console.log('payment completed successfully');
-//     } else {
-//       console.log('payment not successful');
-//     }
-//   }
-// });
