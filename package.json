@@ -1,6 +1,9 @@
 {
   "name": "teaching-site-backend",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.1"
+  },
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
