@@ -4,6 +4,12 @@ const router = require('express').Router();
 const User = require('../users/userModel');
 const config = require('../config');
 
+const passportService = require('../services/passport');
+const passport = require('passport');
+
+const requireAuth = passport.authenticate('jwt', { session: false });
+const requireSignin = passport.authenticate('local', { session: false });
+
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp, expiresIn: '600000ms', username: user.username }, config.secret);
@@ -42,7 +48,7 @@ router.post('/signup', (req, res) => {
     });
 });
 
-router.post('/signin', (req, res) => {
+router.post('/signin', requireSignin, (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   let matched;
