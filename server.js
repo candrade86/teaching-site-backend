@@ -22,19 +22,19 @@ const server = express();
 
 server.use(helmet());
 server.use(morgan('dev'));
-// server.use(cors());
+server.use(cors());
 server.use(express.json());
 
 const CORS_WHITELIST = require('./constants/frontend');
 
-const corsOptions = {
-  origin: (origin, callback) =>
-    (CORS_WHITELIST.indexOf(origin) !== -1)
-      ? callback(null, true)
-      : callback(new Error('Not allowed by CORS'))
-};
+// const corsOptions = {
+//   origin: (origin, callback) =>
+//     (CORS_WHITELIST.indexOf(origin) !== -1)
+//       ? callback(null, true)
+//       : callback(new Error('Not allowed by CORS'))
+// };
 
-server.use(cors(corsOptions));
+// server.use(cors(corsOptions));
 paymentApi(server);
 
 server.get('/', (req, res) => {

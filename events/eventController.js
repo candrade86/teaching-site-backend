@@ -11,6 +11,17 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/classes', (req, res) => {
+  const { title } = req.body;
+  Events.find({ title: title })
+    .then(events => {
+      res.status(200).json(events);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
 router.post("/create-event", (req, res) => {
     let { title, start, end } = req.body;
     const events = new Events ({ title, start, end });
