@@ -12,10 +12,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/classes', (req, res) => {
-  const { title } = req.body;
-  Events.find({ title: title })
+  let title  = req.body.username;
+  console.log('title', title)
+  let eventMap=[];
+
+  Events.find({})
     .then(events => {
-      res.status(200).json(events);
+     eventMap = events.filter(e => {
+       if(e.title === title){ return e }
+      })
+      res.status(200).json(eventMap);
     })
     .catch(err => {
       res.status(500).json(err);
