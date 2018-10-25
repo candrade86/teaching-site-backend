@@ -29,8 +29,9 @@ router.post('/classes', (req, res) => {
 });
 
 router.post("/create-event", (req, res) => {
-    let { title, start, end } = req.body;
-    const events = new Events ({ title, start, end });
+    let { title, start, end, day } = req.body;
+    
+    const events = new Events ({ title, start, end, day });
 
     events.save()
         .then(e => {

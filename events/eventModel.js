@@ -10,6 +10,9 @@ const eventSchema = new mongoose.Schema({
   end: {
     type: Date,
   },
+  day: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model("Event", eventSchema);
