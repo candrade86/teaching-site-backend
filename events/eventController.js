@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id',  (req, res) => {
+router.get('session/:id',  (req, res) => {
   const id = req.params;
   
   Events.find({id})
