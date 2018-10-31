@@ -11,12 +11,12 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('session/:id',  (req, res) => {
-  const id = req.params;
+router.get('/session/:id',  (req, res) => {
+  const id = req.params.id;
   
-  Events.find({id})
-    .then(events => {
-      res.status(200).json(events);
+  Events.findById(id)
+    .then(session => {
+      res.status(200).json(session);
     })
     .catch(err => {
       res.status(500).json(err);
