@@ -16,6 +16,15 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
+  conversation: {
+    type: Number
+  },
+  accent: {
+    type: Number
+  },
+
+  classes: [String],
+
   createdAt: {
       type: Date,
       default: Date.now
