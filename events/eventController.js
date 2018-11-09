@@ -40,7 +40,7 @@ router.post('/classes', (req, res) => {
     });
 });
 
-router.post("/create-event", (req, res) => {
+router.post('/create-event', (req, res) => {
     let { title, start, end, day } = req.body;
     
     const events = new Events ({ title, start, end, day });
@@ -52,7 +52,7 @@ router.post("/create-event", (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-router.put("/update-event", (req, res) => {
+router.put('/update-event', (req, res) => {
     const { id } = req.body;
     let update = req.body.update;
   
