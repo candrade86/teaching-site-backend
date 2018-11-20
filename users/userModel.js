@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema({
     minlength: 6
   },
   classType: {
-    conversation: Number,
-    accent: Number
+    conversation: { type: Number, default: 0 },
+    pronunciation: { type: Number, default: 0 }
   },
   createdAt: {
       type: Date,

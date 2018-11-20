@@ -5,7 +5,6 @@ router.put('/update', (req, res) => {
     const { id, type, total } = req.body;
     let update;
     let numOfClasses;
-    // console.log(id, type, total)
     
     switch (total) {
         case 20:
@@ -15,14 +14,10 @@ router.put('/update', (req, res) => {
             numOfClasses = 5;
             break;
     }
-    console.log('numOfClases', numOfClasses);
     
-
-  
-    User.findByIdAndUpdate(id, { $set: {'type.conversation': numOfClasses}})
+    User.findByIdAndUpdate(id, { $inc: { [`classType.${type}`]: numOfClasses } }, {new: true})
       .then(updated => {
         res.status(200).json(updated);
-        console.log('success man!!!')
       })
       .catch(err => {
         res.status(500).json("Error updating updating USER", err);
