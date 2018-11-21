@@ -1,6 +1,18 @@
 const User = require('./userModel');
 const router = require('express').Router();
 
+router.get('/id',  (req, res) => {
+    const id = req.body;
+    
+    Events.findById(id)
+      .then(user => {
+        res.status(200).json(user);
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  });
+
 router.put('/update', (req, res) => {
     const { id, type, total } = req.body;
     let update;
