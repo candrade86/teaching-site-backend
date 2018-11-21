@@ -1,7 +1,7 @@
 const User = require('./userModel');
 const router = require('express').Router();
 
-router.get('/id',  (req, res) => {
+router.get('/',  (req, res) => {
     const id = req.body;
     
     Events.findById(id)
