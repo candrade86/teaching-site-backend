@@ -1,10 +1,11 @@
 const User = require('./userModel');
 const router = require('express').Router();
 
-router.get('/',  (req, res) => {
-    const id = req.body;
+router.post('/',  (req, res) => {
+    console.log('body', req.body)
+    const { id } = req.body;
     
-    Events.findById(id)
+    User.findById(id)
       .then(user => {
         res.status(200).json(user);
       })
