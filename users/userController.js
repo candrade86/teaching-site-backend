@@ -2,7 +2,6 @@ const User = require('./userModel');
 const router = require('express').Router();
 
 router.post('/',  (req, res) => {
-    console.log('body', req.body)
     const { id } = req.body;
     
     User.findById(id)
@@ -15,6 +14,7 @@ router.post('/',  (req, res) => {
   });
 
 router.put('/update', (req, res) => {
+    console.log(req.body)
     const { id, type, total } = req.body;
     let update;
     let numOfClasses;
@@ -26,8 +26,12 @@ router.put('/update', (req, res) => {
         case 90:
             numOfClasses = 5;
             break;
-    }
-    
+        }
+    if (total === -1) {
+        numOfClasses = -1;
+    } 
+
+    console.log('after', numOfClasses)
     User.findByIdAndUpdate(id, { $inc: { [`classType.${type}`]: numOfClasses } }, {new: true})
       .then(updated => {
         res.status(200).json(updated);
